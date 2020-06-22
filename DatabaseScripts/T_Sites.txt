@@ -1,0 +1,27 @@
+/****** Object:  Table [dbo].[Sites]    Script Date: 6/22/2020 11:05:07 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Sites](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NULL,
+	[Street] [nvarchar](max) NULL,
+	[Street2] [nvarchar](max) NULL,
+	[Street3] [nvarchar](max) NULL,
+	[PostalCode] [nvarchar](max) NULL,
+	[City] [nvarchar](max) NULL,
+	[Country] [nvarchar](max) NULL,
+	[Tel] [nvarchar](max) NULL,
+	[Fax] [nvarchar](max) NULL,
+	[EMail] [nvarchar](max) NULL,
+ CONSTRAINT [PK_dbo.Sites] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+

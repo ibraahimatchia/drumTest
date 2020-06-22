@@ -1,0 +1,47 @@
+/****** Object:  Table [dbo].[Drums]    Script Date: 6/22/2020 11:01:36 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Drums](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[DrumNumber] [nvarchar](max) NULL,
+	[CreatedOn] [datetime] NULL,
+	[Latitude] [float] NULL,
+	[Longitude] [float] NULL,
+	[InPositionSince] [datetime] NULL,
+	[Site_Id] [int] NULL,
+	[LastStatusUpdate] [datetime] NULL,
+	[Status_Id] [int] NOT NULL,
+	[DrumManager_Id] [int] NULL,
+ CONSTRAINT [PK_dbo.Drums] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Drums]  WITH CHECK ADD  CONSTRAINT [FK_dbo.Drums_dbo.DrumManagers_DrumManager_Id] FOREIGN KEY([DrumManager_Id])
+REFERENCES [dbo].[DrumManagers] ([Id])
+GO
+
+ALTER TABLE [dbo].[Drums] CHECK CONSTRAINT [FK_dbo.Drums_dbo.DrumManagers_DrumManager_Id]
+GO
+
+ALTER TABLE [dbo].[Drums]  WITH CHECK ADD  CONSTRAINT [FK_dbo.Drums_dbo.Sites_Site_Id] FOREIGN KEY([Site_Id])
+REFERENCES [dbo].[Sites] ([Id])
+GO
+
+ALTER TABLE [dbo].[Drums] CHECK CONSTRAINT [FK_dbo.Drums_dbo.Sites_Site_Id]
+GO
+
+ALTER TABLE [dbo].[Drums]  WITH CHECK ADD  CONSTRAINT [FK_dbo.Drums_dbo.Statuses_Status_Id] FOREIGN KEY([Status_Id])
+REFERENCES [dbo].[Statuses] ([Id])
+GO
+
+ALTER TABLE [dbo].[Drums] CHECK CONSTRAINT [FK_dbo.Drums_dbo.Statuses_Status_Id]
+GO
+
+

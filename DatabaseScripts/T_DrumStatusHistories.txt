@@ -1,0 +1,34 @@
+/****** Object:  Table [dbo].[DrumStatusHistories]    Script Date: 6/22/2020 11:15:47 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[DrumStatusHistories](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Status_Id] [int] NOT NULL,
+	[Drum_Id] [int] NULL,
+	[LastStatusUpdate] [datetime] NULL,
+ CONSTRAINT [PK_dbo.DrumStatusHistories] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[DrumStatusHistories]  WITH CHECK ADD  CONSTRAINT [FK_dbo.DrumStatusHistories_dbo.Drums_Drum_Id] FOREIGN KEY([Drum_Id])
+REFERENCES [dbo].[Drums] ([Id])
+GO
+
+ALTER TABLE [dbo].[DrumStatusHistories] CHECK CONSTRAINT [FK_dbo.DrumStatusHistories_dbo.Drums_Drum_Id]
+GO
+
+ALTER TABLE [dbo].[DrumStatusHistories]  WITH CHECK ADD  CONSTRAINT [FK_dbo.DrumStatusHistories_dbo.Statuses_Status_Id] FOREIGN KEY([Status_Id])
+REFERENCES [dbo].[Statuses] ([Id])
+GO
+
+ALTER TABLE [dbo].[DrumStatusHistories] CHECK CONSTRAINT [FK_dbo.DrumStatusHistories_dbo.Statuses_Status_Id]
+GO
+
+

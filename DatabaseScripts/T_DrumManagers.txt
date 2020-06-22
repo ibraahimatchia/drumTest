@@ -1,0 +1,17 @@
+/****** Object:  Table [dbo].[DrumManagers]    Script Date: 6/22/2020 11:07:03 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[DrumManagers](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NULL,
+	[ContactEmail] [nvarchar](max) NULL,
+ CONSTRAINT [PK_dbo.DrumManagers] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO

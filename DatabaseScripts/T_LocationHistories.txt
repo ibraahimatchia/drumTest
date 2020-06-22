@@ -1,0 +1,31 @@
+/****** Object:  Table [dbo].[PositionHistories]    Script Date: 6/22/2020 11:10:28 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PositionHistories](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Start] [datetime] NOT NULL,
+	[LastLocationUpdate] [datetime] NOT NULL,
+	[End] [datetime] NULL,
+	[Latitude] [float] NOT NULL,
+	[Longitude] [float] NOT NULL,
+	[Drum_Id] [int] NULL,
+	[Desc] [nvarchar](max) NULL,
+ CONSTRAINT [PK_dbo.PositionHistories] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[PositionHistories]  WITH CHECK ADD  CONSTRAINT [FK_dbo.PositionHistories_dbo.Drums_Drum_Id] FOREIGN KEY([Drum_Id])
+REFERENCES [dbo].[Drums] ([Id])
+GO
+
+ALTER TABLE [dbo].[PositionHistories] CHECK CONSTRAINT [FK_dbo.PositionHistories_dbo.Drums_Drum_Id]
+GO
+
+

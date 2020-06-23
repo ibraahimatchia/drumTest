@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using DrumTest.Areas.HelpPage.ModelDescriptions;
-using DrumTest.Areas.HelpPage.Models;
+using EvaluationDrum.Areas.HelpPage.ModelDescriptions;
+using EvaluationDrum.Areas.HelpPage.Models;
 
-namespace DrumTest.Areas.HelpPage
+namespace EvaluationDrum.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

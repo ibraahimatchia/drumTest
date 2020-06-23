@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace DrumTest.Areas.HelpPage.ModelDescriptions
+namespace EvaluationDrum.Areas.HelpPage.ModelDescriptions
 {
     public class ComplexTypeModelDescription : ModelDescription
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace DrumTest.Areas.HelpPage
+namespace EvaluationDrum.Areas.HelpPage
 {
     /// <summary>
     /// This represents an image sample on the help page. There's a display template named ImageSample associated with this class.

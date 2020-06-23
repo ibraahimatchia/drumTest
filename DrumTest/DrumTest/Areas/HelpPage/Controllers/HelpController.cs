@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using DrumTest.Areas.HelpPage.ModelDescriptions;
-using DrumTest.Areas.HelpPage.Models;
+using EvaluationDrum.Areas.HelpPage.ModelDescriptions;
+using EvaluationDrum.Areas.HelpPage.Models;
 
-namespace DrumTest.Areas.HelpPage.Controllers
+namespace EvaluationDrum.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

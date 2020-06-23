@@ -1,4 +1,4 @@
-namespace DrumTest.Areas.HelpPage.ModelDescriptions
+namespace EvaluationDrum.Areas.HelpPage.ModelDescriptions
 {
     public class EnumValueDescription
     {

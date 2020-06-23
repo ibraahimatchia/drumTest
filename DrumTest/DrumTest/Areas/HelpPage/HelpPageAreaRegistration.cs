@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace DrumTest.Areas.HelpPage
+namespace EvaluationDrum.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {

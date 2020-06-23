@@ -1,6 +1,6 @@
 using System;
 
-namespace DrumTest.Areas.HelpPage.ModelDescriptions
+namespace EvaluationDrum.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Describes a type model.

@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace DrumTest.Areas.HelpPage
+namespace EvaluationDrum.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

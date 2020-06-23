@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using DrumTest.Areas.HelpPage.ModelDescriptions;
+using EvaluationDrum.Areas.HelpPage.ModelDescriptions;
 
-namespace DrumTest.Areas.HelpPage.Models
+namespace EvaluationDrum.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.

@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace DrumTest.Controllers
+namespace EvaluationDrum.Controllers
 {
     public class ValuesController : ApiController
     {

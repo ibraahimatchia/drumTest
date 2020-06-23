@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace DrumTest.Areas.HelpPage.ModelDescriptions
+namespace EvaluationDrum.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

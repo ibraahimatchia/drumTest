@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace DrumTest
+namespace EvaluationDrum
 {
     public class BundleConfig
     {

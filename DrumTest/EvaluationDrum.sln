@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluationDrum", "DrumTest\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{FAF1C636-449A-4CBA-9DE3-C500E00C5C71}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvalDrum.API", "EvalDrum.API\EvalDrum.API.csproj", "{98C5BD33-259A-4F55-9AB9-F0F96C6CA7BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvalDrum.DAL", "EvalDrum.DAL\EvalDrum.DAL.csproj", "{6F0A95F9-FD6F-4C45-BF9C-3DFEF92F6390}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{FAF1C636-449A-4CBA-9DE3-C500E00C5C71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAF1C636-449A-4CBA-9DE3-C500E00C5C71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAF1C636-449A-4CBA-9DE3-C500E00C5C71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98C5BD33-259A-4F55-9AB9-F0F96C6CA7BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98C5BD33-259A-4F55-9AB9-F0F96C6CA7BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98C5BD33-259A-4F55-9AB9-F0F96C6CA7BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98C5BD33-259A-4F55-9AB9-F0F96C6CA7BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F0A95F9-FD6F-4C45-BF9C-3DFEF92F6390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F0A95F9-FD6F-4C45-BF9C-3DFEF92F6390}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F0A95F9-FD6F-4C45-BF9C-3DFEF92F6390}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F0A95F9-FD6F-4C45-BF9C-3DFEF92F6390}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

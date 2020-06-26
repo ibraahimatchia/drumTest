@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvalDrum.API", "EvalDrum.AP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvalDrum.DAL", "EvalDrum.DAL\EvalDrum.DAL.csproj", "{6F0A95F9-FD6F-4C45-BF9C-3DFEF92F6390}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FunctionApps", "FunctionApps", "{F6DFFF0F-896B-49BB-8E15-E2DCCB6FB82A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrumFunctionApp", "DrumFunctionApp\DrumFunctionApp.csproj", "{71A4223A-E9EA-4990-AD8E-4A4ECFD1F719}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,16 @@ Global
 		{6F0A95F9-FD6F-4C45-BF9C-3DFEF92F6390}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F0A95F9-FD6F-4C45-BF9C-3DFEF92F6390}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F0A95F9-FD6F-4C45-BF9C-3DFEF92F6390}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71A4223A-E9EA-4990-AD8E-4A4ECFD1F719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71A4223A-E9EA-4990-AD8E-4A4ECFD1F719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71A4223A-E9EA-4990-AD8E-4A4ECFD1F719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71A4223A-E9EA-4990-AD8E-4A4ECFD1F719}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{71A4223A-E9EA-4990-AD8E-4A4ECFD1F719} = {F6DFFF0F-896B-49BB-8E15-E2DCCB6FB82A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B8AB5B9D-2D51-4492-8D47-CE045B08B7E3}

@@ -201,6 +201,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\DrumManagersController.cs" />
     <Compile Include="Controllers\DrumsController.cs" />
+    <Compile Include="Controllers\HashPassController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SitesController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
@@ -297,6 +298,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common.Shared\Common.Shared.csproj">
+      <Project>{beeccb74-6661-46c1-ad7f-763146bc5db7}</Project>
+      <Name>Common.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EvalDrum.DAL\EvalDrum.DAL.csproj">
       <Project>{6f0a95f9-fd6f-4c45-bf9c-3dfef92f6390}</Project>
       <Name>EvalDrum.DAL</Name>

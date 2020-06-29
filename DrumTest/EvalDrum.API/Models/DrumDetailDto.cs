@@ -16,5 +16,6 @@ namespace EvalDrum.API.Models
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
         public DateTime? InPositionSince { get; set; }
+        public DateTime? LastStatusUpdate { get; set; }
     }
 }

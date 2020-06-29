@@ -7,6 +7,8 @@ using System.Data.Entity;
 using System.Web;
 using EvalDrum.DAL.Models;
 using System.Data.Entity.Infrastructure;
+using System.Net;
+using Common.Shared.ExceptionHandling;
 
 namespace EvalDrum.API.Services
 {
@@ -19,16 +21,21 @@ namespace EvalDrum.API.Services
            this._dbContext = new EvalDrumContext();
         }
 
-        public IEnumerable<DrumDto> GetDrums()
+        public IEnumerable<DrumDetailDto> GetDrums()
         {
             var drums = from d in _dbContext.Drums
-                        select new DrumDto()
+                        select new DrumDetailDto()
                         {
                             Id = d.Id,
+                            DrumNumber = d.DrumNumber,
+                            CreatedOn = d.CreatedOn,
+                            Latitude = d.Latitude,
+                            Longitude = d.Longitude,
+                            InPositionSince = d.InPositionSince,
                             Site = d.Site.Name,
                             Status = d.Status.Status_name,
                             DrumManager = d.DrumManager.Name,
-                            DrumNumber = d.DrumNumber
+                            LastStatusUpdate = d.LastStatusUpdate
                         };
             return drums;
         }
@@ -45,29 +52,48 @@ namespace EvalDrum.API.Services
                 InPositionSince = d.InPositionSince,
                 Site = d.Site.Name,
                 Status = d.Status.Status_name,
-                DrumManager = d.DrumManager.Name
+                DrumManager = d.DrumManager.Name,
+                LastStatusUpdate = d.LastStatusUpdate
             }).SingleOrDefault(d => d.Id == id);
 
             return drum;
         }
 
-        public Drum UpdateDrum(int drumId, Drum drumDetail)
+        public DrumDetailDto UpdateDrum(int drumId, DrumCreateDto drumDetail)
         {
             if (!DrumExists(drumId))
             {
-                return null;
+                throw new BadRequestException($"Drum with Id {drumId} doesn't exist.", BadRequestException.DRUM_DOESNT_EXISTS);
             }
             else
             {
+                //get drum manager, site and status id
+                DrumManager dm = _dbContext.DrumManagers.FirstOrDefault(d => d.Name == drumDetail.DrumManager);
+                Site st = _dbContext.Sites.FirstOrDefault(s => s.Name == drumDetail.Site);
+                Status sts = _dbContext.Status.FirstOrDefault(stt => stt.Status_name == drumDetail.Status);
+                if (dm == null)
+                {
+                    throw new BadRequestException($"Drum Manager with name {drumDetail.DrumManager} doesn't exist.", BadRequestException.WRONG_DRUM_MANAGER_NAME);
+                }
+                if (st == null)
+                {
+                    throw new BadRequestException($"Drum Manager with name {drumDetail.Site} doesn't exist.", BadRequestException.WRONG_SITE_NAME);
+                }
+                if (sts == null)
+                {
+                    throw new BadRequestException($"Drum Manager with name {drumDetail.Status} doesn't exist.", BadRequestException.WRONG_STATUS_NAME);
+                }
+
                 Drum drum = _dbContext.Drums.FirstOrDefault(d => d.Id.Equals(drumId));
 
                 drum.DrumNumber = drumDetail.DrumNumber;
-                drum.DrumManager_Id = drumDetail.DrumManager_Id;
+                drum.DrumManager_Id = dm.Id;
                 drum.Latitude = drumDetail.Latitude;
                 drum.Longitude = drumDetail.Longitude;
                 drum.InPositionSince = drumDetail.InPositionSince;
-                drum.Site_Id = drumDetail.Site_Id;
-                drum.Status_Id = drumDetail.Status_Id;
+                drum.Site_Id = st.Id;
+                drum.Status_Id = sts.Id;
+                drum.LastStatusUpdate = DateTime.UtcNow;
 
                 try
                 {
@@ -75,9 +101,118 @@ namespace EvalDrum.API.Services
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                    throw new BadRequestException(ex.ToString());
                 }
-                return drum;
+                return new DrumDetailDto
+                {
+                    Id = drum.Id,
+                    DrumNumber = drum.DrumNumber,
+                    CreatedOn = drum.CreatedOn,
+                    InPositionSince = drum.InPositionSince,
+                    Latitude = drum.Latitude,
+                    Longitude = drum.Longitude,
+                    DrumManager = drum.DrumManager.Name,
+                    Site = drum.Site.Name,
+                    Status = drum.Status.Status_name,
+                    LastStatusUpdate = drum.LastStatusUpdate
+                };
+            }
+        }
+
+        public DrumDetailDto CreatDrum(string drumNumber, string drumManagerName, string siteName, string statusName, double? latitude, double? longitude)
+        {
+            if (_dbContext.Drums.FirstOrDefault(d => d.DrumNumber == drumNumber) != null)
+            {
+                throw new BadRequestException($"Drum with drumNumber {drumNumber} already exist.", BadRequestException.DUPLICATE_DRUM_NB);
+            }
+            else
+            {
+                //get drum manager, site and status id
+                DrumManager dm = _dbContext.DrumManagers.FirstOrDefault(d => d.Name == drumManagerName);
+                Site st = _dbContext.Sites.FirstOrDefault(s => s.Name == siteName);
+                Status sts = _dbContext.Status.FirstOrDefault(stt => stt.Status_name == statusName);
+                if (dm == null)
+                {
+                    throw new BadRequestException($"Drum Manager with name {drumManagerName} doesn't exist.", BadRequestException.WRONG_DRUM_MANAGER_NAME);
+                }
+                if (st == null)
+                {
+                    throw new BadRequestException($"Site with name {siteName} doesn't exist.", BadRequestException.WRONG_SITE_NAME);
+                }
+                if (sts == null)
+                {
+                    throw new BadRequestException($"Status with name {statusName} doesn't exist.", BadRequestException.WRONG_STATUS_NAME);
+                }
+
+                Drum createDrum = new Drum()
+                {
+                    DrumNumber = drumNumber,
+                    DrumManager_Id = dm.Id,
+                    Site_Id = st.Id,
+                    Status_Id = sts.Id,
+                    CreatedOn = DateTime.UtcNow,
+                    InPositionSince = DateTime.UtcNow,
+                    Latitude = latitude,
+                    Longitude = longitude,
+                    LastStatusUpdate = DateTime.UtcNow
+                };
+                Drum drum = _dbContext.Drums.Add(createDrum);
+
+                try
+                {
+                    _dbContext.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new BadRequestException(ex.ToString());
+                }
+                return new DrumDetailDto
+                {
+                    Id = drum.Id,
+                    DrumNumber = drum.DrumNumber,
+                    CreatedOn = drum.CreatedOn,
+                    InPositionSince = drum.InPositionSince,
+                    Latitude = drum.Latitude,
+                    Longitude = drum.Longitude,
+                    DrumManager = drum.DrumManager.Name,
+                    Site = drum.Site.Name,
+                    Status = drum.Status.Status_name,
+                    LastStatusUpdate = drum.LastStatusUpdate
+                };
+            }
+        }
+
+        public void DrumDeleteById(int id)
+        {
+            Drum drum = _dbContext.Drums.FirstOrDefault(d => d.Id == id);
+            if (drum == null) throw new NotFoundException<Drum>(id);
+
+            _dbContext.Drums.Remove(drum);
+
+            try
+            {
+                _dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new BadRequestException(ex.ToString());
+            }
+        }
+
+        public void DrumDeleteByDrumNumber(string drumNumber)
+        {
+            Drum drum = _dbContext.Drums.FirstOrDefault(d => d.DrumNumber == drumNumber);
+            if (drum == null) throw new NotFoundException<Drum>(drumNumber);
+
+            _dbContext.Drums.Remove(drum);
+
+            try
+            {
+                _dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new BadRequestException(ex.ToString());
             }
         }
 

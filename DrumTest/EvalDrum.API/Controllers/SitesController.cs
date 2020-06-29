@@ -9,111 +9,82 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using EvalDrum.API.Services;
 using EvalDrum.DAL.Models;
 
 namespace EvalDrum.API.Controllers
 {
     public class SitesController : ApiController
     {
-        private EvalDrumContext db = new EvalDrumContext();
+        private SitesService _siteService;
+
+        public SitesController()
+        {
+            this._siteService = new SitesService();
+        }
 
         // GET: api/Sites
-        public IQueryable<Site> GetSites()
+        public IHttpActionResult GetSites()
         {
-            return db.Sites;
+            IEnumerable<Site> sites = _siteService.GetSites();
+            return Ok(sites);
         }
 
         // GET: api/Sites/5
         [ResponseType(typeof(Site))]
-        public async Task<IHttpActionResult> GetSite(int id)
+        public IHttpActionResult GetSite(int id)
         {
-            Site site = await db.Sites.FindAsync(id);
+            Site site = _siteService.GetSitesById(id);
             if (site == null)
             {
-                return NotFound();
+                return StatusCode(HttpStatusCode.NoContent);
             }
 
             return Ok(site);
         }
 
         // PUT: api/Sites/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutSite(int id, Site site)
+        [ResponseType(typeof(Site))]
+        public IHttpActionResult PutSite(int id, Site site)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != site.Id)
-            {
-                return BadRequest();
-            }
+            Site SiteUp = _siteService.UpdateSite(id, site);
 
-            db.Entry(site).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SiteExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(SiteUp);
         }
 
         // POST: api/Sites
         [ResponseType(typeof(Site))]
-        public async Task<IHttpActionResult> PostSite(Site site)
+        public IHttpActionResult PostSite(Site site)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Sites.Add(site);
-            await db.SaveChangesAsync();
+            Site CreateSite = _siteService.CreatSite(site);
 
-            return CreatedAtRoute("DefaultApi", new { id = site.Id }, site);
+            return Ok(CreateSite);
         }
 
         // DELETE: api/Sites/5
         [ResponseType(typeof(Site))]
-        public async Task<IHttpActionResult> DeleteSite(int id)
+        public IHttpActionResult DeleteSite(int id)
         {
-            Site site = await db.Sites.FindAsync(id);
-            if (site == null)
-            {
-                return NotFound();
-            }
-
-            db.Sites.Remove(site);
-            await db.SaveChangesAsync();
-
-            return Ok(site);
+            _siteService.DeleteSiteById(id);
+            return Ok();
         }
 
-        protected override void Dispose(bool disposing)
+        // DELETE: api/Sites/SERVAL_LOGISTIC_SITE_BORDEAUX
+        [ResponseType(typeof(Site))]
+        public IHttpActionResult DeleteSite(string siteName)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool SiteExists(int id)
-        {
-            return db.Sites.Count(e => e.Id == id) > 0;
+            _siteService.DeleteSiteBySiteName(siteName);
+            return Ok();
         }
     }
 }

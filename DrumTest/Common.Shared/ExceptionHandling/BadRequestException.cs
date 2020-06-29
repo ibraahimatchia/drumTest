@@ -10,6 +10,7 @@ namespace Common.Shared.ExceptionHandling
         public static readonly string WRONG_DRUM_MANAGER_NAME = "WRONG_DRUM_MANAGER_NAME";
         public static readonly string WRONG_SITE_NAME = "WRONG_SITE_NAME";
         public static readonly string WRONG_STATUS_NAME = "WRONG_STATUS_NAME";
+        public static readonly string DUPLICATE_SITE_NAME = "DUPLICATE_SITE_NAME";
 
         public BadRequestException(string message)
             : base(message, HttpStatusCode.BadRequest) { }

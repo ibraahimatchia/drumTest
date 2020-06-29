@@ -43,6 +43,7 @@ namespace EvalDrum.API.Controllers
             return Ok(site);
         }
 
+        [Authorize]
         // PUT: api/Sites/5
         [ResponseType(typeof(Site))]
         public IHttpActionResult PutSite(int id, Site site)
@@ -57,6 +58,7 @@ namespace EvalDrum.API.Controllers
             return Ok(SiteUp);
         }
 
+        [Authorize]
         // POST: api/Sites
         [ResponseType(typeof(Site))]
         public IHttpActionResult PostSite(Site site)
@@ -71,16 +73,16 @@ namespace EvalDrum.API.Controllers
             return Ok(CreateSite);
         }
 
+        [Authorize]
         // DELETE: api/Sites/5
-        [ResponseType(typeof(Site))]
         public IHttpActionResult DeleteSite(int id)
         {
             _siteService.DeleteSiteById(id);
             return Ok();
         }
 
+        [Authorize]
         // DELETE: api/Sites/SERVAL_LOGISTIC_SITE_BORDEAUX
-        [ResponseType(typeof(Site))]
         public IHttpActionResult DeleteSite(string siteName)
         {
             _siteService.DeleteSiteBySiteName(siteName);

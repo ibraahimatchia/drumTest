@@ -17,6 +17,11 @@ namespace EvalDrum.API.Services
            this._dbContext = new EvalDrumContext();
         }
 
+        public DrumsService(EvalDrumContext context)
+        {
+            this._dbContext = context;
+        }
+
         public IEnumerable<DrumDetailDto> GetDrums()
         {
             var drums = from d in _dbContext.Drums

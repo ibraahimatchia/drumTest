@@ -9,111 +9,86 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using EvalDrum.API.Services;
 using EvalDrum.DAL.Models;
 
 namespace EvalDrum.API.Controllers
 {
     public class DrumManagersController : ApiController
     {
-        private EvalDrumContext db = new EvalDrumContext();
+        private DrumManagersService _drumManagerService;
+
+        public DrumManagersController()
+        {
+            this._drumManagerService = new DrumManagersService();
+        }
 
         // GET: api/DrumManagers
-        public IQueryable<DrumManager> GetDrumManagers()
+        public IHttpActionResult GetDrumManagers()
         {
-            return db.DrumManagers;
+            IEnumerable<DrumManager> drumManagers = _drumManagerService.GetDrumManagers();
+            return Ok(drumManagers);
         }
 
         // GET: api/DrumManagers/5
         [ResponseType(typeof(DrumManager))]
-        public async Task<IHttpActionResult> GetDrumManager(int id)
+        public IHttpActionResult GetDrumManager(int id)
         {
-            DrumManager drumManager = await db.DrumManagers.FindAsync(id);
+            DrumManager drumManager = _drumManagerService.GetDrumManagerById(id);
             if (drumManager == null)
             {
-                return NotFound();
+                return StatusCode(HttpStatusCode.NoContent);
             }
 
             return Ok(drumManager);
         }
 
+        [Authorize]
         // PUT: api/DrumManagers/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutDrumManager(int id, DrumManager drumManager)
+        public IHttpActionResult PutDrumManager(int id, DrumManager drumManager)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != drumManager.Id)
-            {
-                return BadRequest();
-            }
+            DrumManager drumManagerUp = _drumManagerService.UpdateDrumManager(id, drumManager);
 
-            db.Entry(drumManager).State = EntityState.Modified;
+            return Ok(drumManagerUp);
 
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DrumManagerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [Authorize]
         // POST: api/DrumManagers
         [ResponseType(typeof(DrumManager))]
-        public async Task<IHttpActionResult> PostDrumManager(DrumManager drumManager)
+        public IHttpActionResult PostDrumManager(DrumManager drumManager)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.DrumManagers.Add(drumManager);
-            await db.SaveChangesAsync();
+            DrumManager drumManagerCreate = _drumManagerService.CreatDrumManager(drumManager);
 
-            return CreatedAtRoute("DefaultApi", new { id = drumManager.Id }, drumManager);
+            return Ok(drumManagerCreate);
+
         }
 
+        [Authorize]
         // DELETE: api/DrumManagers/5
-        [ResponseType(typeof(DrumManager))]
-        public async Task<IHttpActionResult> DeleteDrumManager(int id)
+        public IHttpActionResult DeleteDrumManager(int id)
         {
-            DrumManager drumManager = await db.DrumManagers.FindAsync(id);
-            if (drumManager == null)
-            {
-                return NotFound();
-            }
-
-            db.DrumManagers.Remove(drumManager);
-            await db.SaveChangesAsync();
-
-            return Ok(drumManager);
+            _drumManagerService.DeleteDrumManagerById(id);
+            return Ok();
         }
 
-        protected override void Dispose(bool disposing)
+        [Authorize]
+        // DELETE: api/DrumManagers?drumManagerName=xxxxx
+        public IHttpActionResult DeleteDrumManager(string drumManagerName)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool DrumManagerExists(int id)
-        {
-            return db.DrumManagers.Count(e => e.Id == id) > 0;
+            _drumManagerService.DeleteDrumManagerByName(drumManagerName);
+            return Ok();
         }
     }
 }

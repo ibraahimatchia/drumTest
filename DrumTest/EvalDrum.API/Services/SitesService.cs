@@ -35,7 +35,7 @@ namespace EvalDrum.API.Services
         {
             if (!SiteExists(siteId))
             {
-                throw new BadRequestException($"Drum with Id {siteId} doesn't exist.", BadRequestException.DRUM_DOESNT_EXISTS);
+                throw new BadRequestException($"Site with Id {siteId} doesn't exist.", BadRequestException.SITE_DOESNT_EXISTS);
             }
             else
             {
@@ -76,7 +76,7 @@ namespace EvalDrum.API.Services
                     Tel = site.Tel,
                     Fax = site.Fax,
                     EMail = site.EMail
-            };
+                };
             }
         }
 
@@ -119,10 +119,10 @@ namespace EvalDrum.API.Services
             }
         }
 
-        public void DeleteSiteBySiteName(string siteName)
+        public void DeleteSiteByName(string siteName)
         {
             Site site = _dbContext.Sites.FirstOrDefault(s => s.Name == siteName);
-            if (site == null) throw new NotFoundException<Drum>(siteName);
+            if (site == null) throw new NotFoundException<Site>(siteName);
 
             _dbContext.Sites.Remove(site);
 

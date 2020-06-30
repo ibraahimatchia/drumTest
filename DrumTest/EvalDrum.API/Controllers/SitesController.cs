@@ -82,10 +82,10 @@ namespace EvalDrum.API.Controllers
         }
 
         [Authorize]
-        // DELETE: api/Sites/SERVAL_LOGISTIC_SITE_BORDEAUX
+        // DELETE: api/Sites?siteName=SERVAL_LOGISTIC_SITE_BORDEAUX
         public IHttpActionResult DeleteSite(string siteName)
         {
-            _siteService.DeleteSiteBySiteName(siteName);
+            _siteService.DeleteSiteByName(siteName);
             return Ok();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 public class EvalDrumContext : IdentityDbContext
 {
@@ -14,11 +15,11 @@ public class EvalDrumContext : IdentityDbContext
         this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
     }
 
-    public System.Data.Entity.DbSet<EvalDrum.DAL.Models.Drum> Drums { get; set; }
+    public virtual DbSet<EvalDrum.DAL.Models.Drum> Drums { get; set; }
 
-    public System.Data.Entity.DbSet<EvalDrum.DAL.Models.DrumManager> DrumManagers { get; set; }
+    public virtual DbSet<EvalDrum.DAL.Models.DrumManager> DrumManagers { get; set; }
 
-    public System.Data.Entity.DbSet<EvalDrum.DAL.Models.Site> Sites { get; set; }
+    public virtual DbSet<EvalDrum.DAL.Models.Site> Sites { get; set; }
 
-    public System.Data.Entity.DbSet<EvalDrum.DAL.Models.Status> Status { get; set; }
+    public virtual DbSet<EvalDrum.DAL.Models.Status> Status { get; set; }
 }

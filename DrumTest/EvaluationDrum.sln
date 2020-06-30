@@ -17,6 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrumFunctionApp", "DrumFunc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Shared", "Common.Shared\Common.Shared.csproj", "{BEECCB74-6661-46C1-AD7F-763146BC5DB7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{C420D784-C4C6-4EAC-9594-A07B700030FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvalDrum.API_Unit_Tests", "EvalDrum.API_Unit_Tests\EvalDrum.API_Unit_Tests.csproj", "{8CBE12F7-55A1-4D60-B0AC-A099ED40C8F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,12 +51,17 @@ Global
 		{BEECCB74-6661-46C1-AD7F-763146BC5DB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEECCB74-6661-46C1-AD7F-763146BC5DB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEECCB74-6661-46C1-AD7F-763146BC5DB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CBE12F7-55A1-4D60-B0AC-A099ED40C8F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CBE12F7-55A1-4D60-B0AC-A099ED40C8F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CBE12F7-55A1-4D60-B0AC-A099ED40C8F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CBE12F7-55A1-4D60-B0AC-A099ED40C8F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{71A4223A-E9EA-4990-AD8E-4A4ECFD1F719} = {F6DFFF0F-896B-49BB-8E15-E2DCCB6FB82A}
+		{8CBE12F7-55A1-4D60-B0AC-A099ED40C8F6} = {C420D784-C4C6-4EAC-9594-A07B700030FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B8AB5B9D-2D51-4492-8D47-CE045B08B7E3}

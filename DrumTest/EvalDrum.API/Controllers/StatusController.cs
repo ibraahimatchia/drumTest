@@ -9,111 +9,84 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using EvalDrum.API.Services;
 using EvalDrum.DAL.Models;
 
 namespace EvalDrum.API.Controllers
 {
     public class StatusController : ApiController
     {
-        private EvalDrumContext db = new EvalDrumContext();
+        private StatusService _statusService;
+
+        public StatusController()
+        {
+            this._statusService = new StatusService();
+        }
 
         // GET: api/Status
-        public IQueryable<Status> GetStatus()
+        public IHttpActionResult GetStatus()
         {
-            return db.Status;
+            IEnumerable<Status> statuses = _statusService.GetStatus();
+            return Ok(statuses);
         }
 
         // GET: api/Status/5
         [ResponseType(typeof(Status))]
-        public async Task<IHttpActionResult> GetStatus(int id)
+        public IHttpActionResult GetStatus(int id)
         {
-            Status status = await db.Status.FindAsync(id);
+            Status status = _statusService.GetStatusById(id);
             if (status == null)
             {
-                return NotFound();
+                return StatusCode(HttpStatusCode.NoContent);
             }
 
             return Ok(status);
         }
 
+        [Authorize]
         // PUT: api/Status/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutStatus(int id, Status status)
+        public IHttpActionResult PutStatus(int id, Status status)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != status.Id)
-            {
-                return BadRequest();
-            }
+            Status StatusUp = _statusService.UpdateStatus(id, status);
 
-            db.Entry(status).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!StatusExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(StatusUp);
         }
 
+        [Authorize]
         // POST: api/Status
         [ResponseType(typeof(Status))]
-        public async Task<IHttpActionResult> PostStatus(Status status)
+        public IHttpActionResult PostStatus(Status status)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Status.Add(status);
-            await db.SaveChangesAsync();
+            Status CreateStatus = _statusService.CreatStatus(status);
 
-            return CreatedAtRoute("DefaultApi", new { id = status.Id }, status);
+            return Ok(CreateStatus);
         }
 
+        [Authorize]
         // DELETE: api/Status/5
-        [ResponseType(typeof(Status))]
-        public async Task<IHttpActionResult> DeleteStatus(int id)
+        public IHttpActionResult DeleteStatus(int id)
         {
-            Status status = await db.Status.FindAsync(id);
-            if (status == null)
-            {
-                return NotFound();
-            }
-
-            db.Status.Remove(status);
-            await db.SaveChangesAsync();
-
-            return Ok(status);
+            _statusService.DeleteStatusById(id);
+            return Ok();
         }
 
-        protected override void Dispose(bool disposing)
+        [Authorize]
+        // DELETE: api/Status?statusName = xxxx
+        public IHttpActionResult DeleteStatus(string statusName)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool StatusExists(int id)
-        {
-            return db.Status.Count(e => e.Id == id) > 0;
+            _statusService.DeleteStatusByName(statusName);
+            return Ok();
         }
     }
 }

@@ -19,9 +19,9 @@ namespace EvalDrum.API.Controllers
     {
         private readonly DrumsService _drumService;
 
-        public DrumsController()
+        public DrumsController(DrumsService service)
         {
-            _drumService = new DrumsService();
+            _drumService = service;
         }
 
         // GET: api/Drums

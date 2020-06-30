@@ -18,9 +18,9 @@ namespace EvalDrum.API.Controllers
     {
         private StatusService _statusService;
 
-        public StatusController()
+        public StatusController(StatusService statusService)
         {
-            this._statusService = new StatusService();
+            this._statusService = statusService;
         }
 
         // GET: api/Status

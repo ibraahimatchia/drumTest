@@ -12,9 +12,9 @@ namespace EvalDrum.API.Services
     {
         private readonly EvalDrumContext _dbContext;
 
-        public SitesService()
+        public SitesService(EvalDrumContext dbContext)
         {
-            this._dbContext = new EvalDrumContext();
+            this._dbContext = dbContext;
         }
 
         public IEnumerable<Site> GetSites()

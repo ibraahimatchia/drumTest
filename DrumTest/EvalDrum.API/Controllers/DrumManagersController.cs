@@ -18,9 +18,9 @@ namespace EvalDrum.API.Controllers
     {
         private DrumManagersService _drumManagerService;
 
-        public DrumManagersController()
+        public DrumManagersController(DrumManagersService drumManagerService)
         {
-            this._drumManagerService = new DrumManagersService();
+            this._drumManagerService = drumManagerService;
         }
 
         // GET: api/DrumManagers

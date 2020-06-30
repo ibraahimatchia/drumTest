@@ -18,9 +18,9 @@ namespace EvalDrum.API.Controllers
     {
         private SitesService _siteService;
 
-        public SitesController()
+        public SitesController(SitesService siteService)
         {
-            this._siteService = new SitesService();
+            this._siteService = siteService;
         }
 
         // GET: api/Sites

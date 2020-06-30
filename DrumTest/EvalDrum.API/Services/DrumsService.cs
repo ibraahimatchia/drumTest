@@ -12,14 +12,9 @@ namespace EvalDrum.API.Services
     {
         private readonly EvalDrumContext _dbContext;
 
-        public DrumsService()
-        {
-           this._dbContext = new EvalDrumContext();
-        }
-
         public DrumsService(EvalDrumContext context)
         {
-            this._dbContext = context;
+           this._dbContext = context;
         }
 
         public IEnumerable<DrumDetailDto> GetDrums()

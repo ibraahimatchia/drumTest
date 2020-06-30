@@ -6,7 +6,7 @@
     using System.Linq;
     using Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<EvalDrumContext>
+    public sealed class Configuration : DbMigrationsConfiguration<EvalDrumContext>
     {
         public Configuration()
         {

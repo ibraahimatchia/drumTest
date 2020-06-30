@@ -11,9 +11,9 @@ namespace EvalDrum.API.Services
     {
         private readonly EvalDrumContext _dbContext;
 
-        public StatusService()
+        public StatusService(EvalDrumContext dbContext)
         {
-            this._dbContext = new EvalDrumContext();
+            this._dbContext = dbContext;
         }
 
         public IEnumerable<Status> GetStatus()

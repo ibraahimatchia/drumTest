@@ -24,7 +24,7 @@ namespace DrumFunctionApp.Repositories
         public void RemoveDrum()
         {
             string sqlCommand = @"DELETE FROM [dbo].[Drums] 
-                                    WHERE InPositionSince < DATEADD(year,-2,GETDATE())";
+                                    WHERE InPositionSince < DATEADD(year,-1,GETDATE())";
 
             _context.Database.ExecuteSqlCommand(sqlCommand);
         }

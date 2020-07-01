@@ -1,0 +1,32 @@
+-------insert statuses
+Id	Status	CreatedOn
+1	OnSite	2020-06-22 15:01:00.000
+
+
+
+
+
+-------insert drum
+Id	DrumNumber	CreatedOn	Latitude	Longitude	InPositionSince	Site_Id	LastStatusUpdate	Status_Id	DrumManager_Id
+1	IBGA173955	2017-07-01 00:00:00.000	50.51495	3.61610000000002	2020-03-23 13:00:41.813	1	2018-09-23 10:19:17.320	1	1.
+
+
+
+INSERT INTO [dbo].[Drums] ([DrumNumber],[CreatedOn],[Latitude],[Longitude],[InPositionSince],[LastStatusUpdate],[DrumManager_Id],[Site_Id],[Status_Id])
+     VALUES ('IBGA173100','2018-01-24 00:00:00.000',55.555555,65.66666,'2019-01-24 00:00:00.000','2019-01-24 00:00:00.000',1,1,1);
+
+INSERT INTO [dbo].[Drums] ([DrumNumber],[CreatedOn],[Latitude],[Longitude],[InPositionSince],[LastStatusUpdate],[DrumManager_Id],[Site_Id],[Status_Id])
+     VALUES ('IBGA173110','2018-02-15 00:00:00.000',85.88888,45.454545,'2019-02-15 00:00:00.000','2019-02-15 00:00:00.000',1,1,1);
+
+INSERT INTO [dbo].[Drums] ([DrumNumber],[CreatedOn],[Latitude],[Longitude],[InPositionSince],[LastStatusUpdate],[DrumManager_Id],[Site_Id],[Status_Id])
+     VALUES ('IBGA173115','2018-05-13 00:00:00.000',155.1111,75.000220,'2018-12-13 00:00:00.000','2018-12-13 00:00:00.000',1,1,1);
+
+INSERT INTO [dbo].[Drums] ([DrumNumber],[CreatedOn],[Latitude],[Longitude],[InPositionSince],[LastStatusUpdate],[DrumManager_Id],[Site_Id],[Status_Id])
+     VALUES ('IBGA173125','2017-06-18 00:00:00.000',25.99999,65.999990,'2018-06-18 00:00:00.000','2018-06-18 00:00:00.000',1,1,1);
+
+INSERT INTO [dbo].[Drums] ([DrumNumber],[CreatedOn],[Latitude],[Longitude],[InPositionSince],[LastStatusUpdate],[DrumManager_Id],[Site_Id],[Status_Id])
+     VALUES ('IBGA173130','2018-09-13 00:00:00.000',105.1111,15.300220,'2019-12-13 00:00:00.000','2019-12-13 00:00:00.000',1,1,1);
+
+INSERT INTO [dbo].[Drums] ([DrumNumber],[CreatedOn],[Latitude],[Longitude],[InPositionSince],[LastStatusUpdate],[DrumManager_Id],[Site_Id],[Status_Id])
+     VALUES ('IBGA173140','2017-01-20 00:00:00.000',125.11999,35.339990,'2018-06-18 00:00:00.000','2018-06-18 00:00:00.000',1,1,1);
+GO

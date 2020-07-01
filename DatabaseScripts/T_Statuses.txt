@@ -1,0 +1,17 @@
+/****** Object:  Table [dbo].[Statuses]    Script Date: 6/22/2020 11:15:47 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Statuses](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Status] [nvarchar](max) NULL,
+	[CreatedOn] [datetime] NULL,
+ CONSTRAINT [PK_dbo.Statuses] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
